@@ -1,9 +1,9 @@
-/* 1. Global Reset & Background */
+/* 1. Global Reset & Body */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
 body {
@@ -12,110 +12,99 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Prevents scrollbars from popups */
-    background-color: #ffe5ec;
+    overflow: hidden;
+    background-color: #ffe5ec; /* Fallback color */
 }
 
+/* 2. Background Fix */
 #bg-image {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Updated to .png as per your instructions */
-    background: url('background.png') no-repeat center center;
+    /* Re-added 'images/' folder path - check if your file is in a folder! */
+    background: url('images/background.png') no-repeat center center;
     background-size: cover;
     z-index: -1;
     transition: filter 0.5s ease;
 }
 
-/* 2. Responsive Card Layout */
+/* 3. The Card - Laptop Friendly */
 .card {
-    background: rgba(255, 182, 193, 0.85); /* Slightly more transparent for laptop */
+    background: rgba(255, 182, 193, 0.85);
     backdrop-filter: blur(12px);
-    padding: clamp(1.5rem, 3vw, 3rem);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2.5rem;
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
     
-    /* Responsive width: 90% on small screens, max 750px on big ones */
     width: 90%;
-    max-width: 750px; 
-    
-    /* Ensure it doesn't get taller than laptop screen */
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    max-width: 700px; /* Reduced further for smaller laptops */
     z-index: 10;
 }
 
-/* 3. Heading - The "One Line" Fix */
+/* 4. The One-Line Fix */
 h1 {
-    /* clamp(min, preferred, max) scales font smoothly */
-    font-size: clamp(1.2rem, 2.5vw, 2.1rem); 
+    font-size: clamp(1.1rem, 2.5vw, 1.9rem); 
     color: #444;
     margin-bottom: 20px;
-    white-space: nowrap; /* Forces one line */
+    white-space: nowrap; 
     overflow: hidden;
-    text-overflow: ellipsis; /* Adds "..." if screen is impossibly small */
+    text-overflow: clip; /* Clean edge */
 }
 
-/* 4. Pop-up Image Fix */
+/* 5. Pop-up Pic Fix (Killing the "Boxes") */
 .temp-img {
     position: fixed;
-    /* Hard-coded smaller size for laptops */
-    width: clamp(80px, 12vw, 130px); 
+    width: clamp(70px, 10vw, 110px); /* Smaller for laptop */
     border-radius: 12px;
-    pointer-events: none; /* Can't click them, only buttons */
+    pointer-events: none;
     z-index: 100;
     animation: popFade 3s forwards;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    /* These lines kill the "boxes" / borders */
+    border: none !important;
+    outline: none !important;
+    box-shadow: none; 
+    -webkit-user-drag: none;
 }
 
 @keyframes popFade {
     0% { transform: scale(0.5); opacity: 0; }
-    20% { transform: scale(1.1); opacity: 1; }
+    20% { transform: scale(1); opacity: 1; }
     80% { opacity: 1; }
-    100% { transform: translateY(-50px); opacity: 0; }
+    100% { transform: translateY(-30px); opacity: 0; }
 }
 
-/* 5. Buttons */
+/* 6. Buttons & Rain */
 .btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin-top: 10px;
+    min-height: 100px;
 }
 
 button {
-    padding: clamp(10px, 1.5vw, 15px) clamp(20px, 3vw, 40px);
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    padding: 12px 28px;
+    font-size: 1.1rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.2s, background 0.3s;
+    transition: transform 0.2s;
 }
 
 .btn-pink { background: #ff4d6d; color: white; }
-.btn-pink:hover { background: #ff758f; transform: scale(1.05); }
-
 .btn-white { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; }
+.btn-back { background: #888; color: white; padding: 10px 20px; font-size: 0.9rem; }
 
-.btn-back {
-    background: #888;
-    color: white;
-    font-size: 0.9rem;
-    padding: 8px 15px;
-}
-
-/* 6. Rain Effect */
-.rain-emoji {
+/* Emoji drop fix */
+.drop {
     position: fixed;
     top: -50px;
-    font-size: 2rem;
     z-index: 5;
     animation: fall linear forwards;
 }
@@ -124,15 +113,9 @@ button {
     to { transform: translateY(110vh); }
 }
 
-/* Shake effect for the No button */
-.shake {
-    animation: shakeAnim 0.3s infinite;
-}
-
+.shake { animation: shakeAnim 0.3s infinite; }
 @keyframes shakeAnim {
-    0% { transform: translate(0, 0); }
-    25% { transform: translate(5px, 5px); }
-    50% { transform: translate(-5px, 0); }
-    75% { transform: translate(5px, -5px); }
-    100% { transform: translate(0, 0); }
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(4px, 4px); }
+    75% { transform: translate(-4px, -4px); }
 }
