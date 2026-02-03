@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -18,9 +19,9 @@ body, html {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    /* Updated to .png per your request */
     background: url('images/background.png') no-repeat center center/cover;
     z-index: -1;
+    transition: filter 0.6s ease; /* Smooth color return */
 }
 
 .card {
@@ -30,16 +31,15 @@ body, html {
     border-radius: 40px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    width: 850px; /* Wider to fit the text on one line */
+    width: 850px;
     max-width: 95%;
     z-index: 10;
 }
 
 h1 {
-    font-size: 2.5rem; /* Bigger font */
+    font-size: 2.5rem;
     color: #444;
     margin-bottom: 20px;
-    white-space: nowrap; /* Forces one line if possible */
 }
 
 .btn-container {
@@ -47,12 +47,12 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    height: 250px; 
+    height: 250px;
 }
 
 button {
-    padding: 20px 45px; /* Bigger buttons */
-    font-size: 1.6rem; /* Bigger button text */
+    padding: 20px 45px;
+    font-size: 1.6rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -64,25 +64,35 @@ button {
 .btn-white { background-color: white; color: #ff4d6d; border: 2px solid #ff4d6d; }
 .btn-back { background-color: #666; color: white; }
 
-.shake { animation: shakeEffect 0.2s infinite; }
-@keyframes shakeEffect {
-    0% { transform: translate(2px, 2px); }
-    50% { transform: translate(-2px, -2px); }
-    100% { transform: translate(2px, -2px); }
+/* Particle/Rain Animation */
+.drop {
+    position: fixed;
+    top: -50px;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1000;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
 }
 
 .temp-img {
-    position: fixed; 
-    width: 200px; /* Bigger pop-up images */
-    border-radius: 20px;
-    pointer-events: none; 
-    z-index: 100;
-    animation: popFade 3s forwards; /* Increased from 1.4s to 3s */
+    position: fixed; width: 200px; border-radius: 20px;
+    pointer-events: none; z-index: 100;
+    animation: popFade 3s forwards;
 }
 
 @keyframes popFade {
-    0% { transform: scale(0) rotate(-5deg); opacity: 0; }
-    10% { transform: scale(1) rotate(0deg); opacity: 1; }
+    0% { transform: scale(0); opacity: 0; }
+    10% { transform: scale(1); opacity: 1; }
     90% { transform: scale(1); opacity: 1; }
     100% { transform: scale(1.1); opacity: 0; }
+}
+
+.shake { animation: shakeEffect 0.2s infinite; }
+@keyframes shakeEffect {
+    0% { transform: translate(2px, 2px); }
+    100% { transform: translate(-2px, -2px); }
 }

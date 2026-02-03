@@ -10,6 +10,11 @@ function handleNo() {
     const leftBtn = document.getElementById('leftBtn');
     const rightBtn = document.getElementById('rightBtn');
     const mainText = document.getElementById('main-text');
+    const bg = document.getElementById('bg-image');
+
+    // 1. Progressively Grayscale the background
+    // 0 -> 25% -> 50% -> 75% -> 100%
+    bg.style.filter = `grayscale(${noCount * 25}%)`;
 
     leftBtn.innerText = "← Go Back";
     leftBtn.className = "btn-back";
@@ -34,6 +39,8 @@ function handleNo() {
         rightBtn.style.transform = "scale(0.2)";
     } 
     else {
+        // FINAL NO REACHED
+        startRain("💧"); // Only rains on the final stage
         document.getElementById('interactive-content').innerHTML = `
             <h1>Fine... 🥺</h1>
             <p style="margin: 20px 0; font-size: 1.5rem;">I guess I'll take my chocolate and go home.</p>
@@ -42,7 +49,6 @@ function handleNo() {
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Try Again?</button>
         `;
     }
-
     spawnPopups(sadImages);
 }
 
@@ -62,10 +68,11 @@ function handleYes() {
     }
     else if (yesCount === 2) {
         mainText.innerText = "There’s no going back…";
-        // Fixed: Added logic to make the Yes button even bigger on step 2
         leftBtn.style.transform = "scale(1.6)";
     } 
     else {
+        // FINAL YES REACHED
+        startRain("❤️"); // Only rains on the final stage
         document.getElementById('interactive-content').innerHTML = `
             <h1 style="color: #ff4d6d; font-size: 3.5rem;">YAY! ❤️</h1>
             <h2 style="margin-bottom: 15px; font-size: 2rem;">See you at the wedding!</h2>
@@ -74,13 +81,31 @@ function handleYes() {
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Back to Start</button>
         `;
     }
-    
     spawnPopups(happyImages);
+}
+
+function startRain(emoji) {
+    const amount = 50; 
+    for (let i = 0; i < amount; i++) {
+        setTimeout(() => {
+            const drop = document.createElement("div");
+            drop.className = "drop";
+            drop.innerText = emoji;
+            drop.style.left = Math.random() * 100 + "vw";
+            drop.style.fontSize = (Math.random() * 20 + 20) + "px";
+            drop.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            document.body.appendChild(drop);
+            setTimeout(() => drop.remove(), 4000);
+        }, i * 100);
+    }
 }
 
 function resetEverything() {
     noCount = 0;
     yesCount = 0;
+    // Reset background color to 0% grayscale
+    document.getElementById('bg-image').style.filter = "grayscale(0%)";
+    
     document.getElementById('interactive-content').innerHTML = `
         <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
         <div class="btn-container">
@@ -91,7 +116,6 @@ function resetEverything() {
 }
 
 function spawnPopups(imgArray) {
-    // Increased i < 10 for more images
     for (let i = 0; i < 10; i++) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
@@ -99,7 +123,6 @@ function spawnPopups(imgArray) {
         img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
         img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
         document.body.appendChild(img);
-        // Timeout matches the 3s CSS animation
-        setTimeout(() => img.remove(), 3000);
+        setTimeout(() => img.remove(), 1500);
     }
 }
