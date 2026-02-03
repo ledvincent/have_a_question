@@ -31,16 +31,20 @@ body, html {
     border-radius: 40px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    width: 850px;
+    /* Increased width and added min-width to prevent shrinking */
+    width: 950px; 
+    min-width: 900px;
     max-width: 95%;
     z-index: 10;
 }
 
 h1 {
-    font-size: 2.5rem;
+    /* Slightly smaller font to ensure it fits the width */
+    font-size: 2.2rem; 
     color: #444;
     margin-bottom: 20px;
-    white-space: nowrap;
+    /* This prevents the browser from wrapping the text to a new line */
+    white-space: nowrap; 
 }
 
 .btn-container {

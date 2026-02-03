@@ -45,7 +45,7 @@ function handleNo() {
         startRain("💧"); 
         document.getElementById('interactive-content').innerHTML = `
             <h1>Fine... 🥺</h1>
-            <p style="margin: 20px 0; font-size: 1.5rem;">I guess I'll take my chocolate and go home.</p>
+            <p style="margin: 20px 0; font-size: 1.5rem;">I hope we meet again in our next lives.</p>
             <img src="${sadImages[2]}" style="width: 80%; border-radius: 20px;">
             <br>
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Try Again?</button>
