@@ -45,7 +45,7 @@ function handleNo() {
         startRain("💧"); 
         document.getElementById('interactive-content').innerHTML = `
             <h1>Fine... 🥺</h1>
-            <p style="margin: 20px 0; font-size: 1.5rem;">I hope we meet again in our next lives.</p>
+            <p style="margin: 20px 0; font-size: 1.5rem;">I guess I'll take my chocolate and go home.</p>
             <img src="${sadImages[2]}" style="width: 80%; border-radius: 20px;">
             <br>
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Try Again?</button>
@@ -109,7 +109,7 @@ function resetEverything() {
     yesCount = 0;
     document.getElementById('bg-image').style.filter = "grayscale(0%)";
     document.getElementById('interactive-content').innerHTML = `
-        <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
+        <h1 id="main-text">To the cutest person I've met this year... Will you be my Valentine?</h1>
         <div class="btn-container">
             <button id="leftBtn" class="btn-pink" onclick="handleYes()">Yes</button>
             <button id="rightBtn" class="btn-white" onclick="handleNo()">No</button>
