@@ -123,10 +123,16 @@ function spawnPopups(imgArray) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+        
+        // Positioning logic
+        img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+        
         document.body.appendChild(img);
-        // This ensures the element is removed AFTER the 3s fade animation finishes
-        setTimeout(() => img.remove(), 1000);
+        
+        // This MUST match the 1.3s (1300ms) in your CSS
+        setTimeout(() => {
+            img.remove();
+        }, 1300); 
     }
 }
