@@ -1,0 +1,90 @@
+body, html {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Arial', sans-serif;
+}
+
+#bg-image {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('images/background.jpg') no-repeat center center/cover;
+    z-index: -1;
+}
+
+.card {
+    background: rgba(255, 182, 193, 0.7); /* Soft pink transparency */
+    backdrop-filter: blur(12px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    padding: 3rem;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    width: 350px;
+    transition: all 0.5s ease;
+}
+
+.btn-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 100px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#yesBtn { 
+    background-color: #ff4d6d; 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); 
+}
+
+#noBtn { 
+    background-color: white; 
+    color: #ff4d6d; 
+    position: relative; 
+}
+
+/* Particle Animation (Hearts/Tears) */
+.particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    font-size: 24px;
+    animation: moveParticle 1.5s ease-out forwards;
+}
+
+@keyframes moveParticle {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-150px) translateX(calc(-50px + 100px * var(--random-x))) scale(0); opacity: 0; }
+}
+
+/* Stage 3: Shake */
+.shake-violent { animation: shake 0.1s infinite; }
+@keyframes shake {
+    0% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, -2px); }
+    100% { transform: translate(2px, -2px); }
+}
+
+.temp-reaction-img {
+    position: fixed; width: 150px; border-radius: 15px;
+    pointer-events: none; z-index: 5;
+    animation: popAndFade 1.2s forwards;
+}
+
+@keyframes popAndFade {
+    0% { transform: scale(0); opacity: 0; }
+    20% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.1); opacity: 0; }
+}
