@@ -40,6 +40,7 @@ h1 {
     font-size: 2.5rem;
     color: #444;
     margin-bottom: 20px;
+    white-space: nowrap;
 }
 
 .btn-container {
@@ -79,16 +80,20 @@ button {
 }
 
 .temp-img {
-    position: fixed; width: 200px; border-radius: 20px;
-    pointer-events: none; z-index: 100;
-    animation: popFade 3s forwards;
+    position: fixed; 
+    width: 150px; 
+    border-radius: 20px;
+    pointer-events: none; 
+    z-index: 100;
+    /* We use 'forwards' to ensure it stays at 0% opacity at the end */
+    animation: popFade 3s forwards; 
 }
 
 @keyframes popFade {
     0% { transform: scale(0); opacity: 0; }
-    10% { transform: scale(1); opacity: 1; }
-    90% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.1); opacity: 0; }
+    10% { transform: scale(1); opacity: 1; }  /* Pop in quickly */
+    80% { transform: scale(1); opacity: 1; }  /* Stay solid until 80% of the time */
+    100% { transform: scale(1.1); opacity: 0; } /* Fade and grow slightly */
 }
 
 .shake { animation: shakeEffect 0.2s infinite; }
