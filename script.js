@@ -119,12 +119,18 @@ function resetEverything() {
 }
 
 function spawnPopups(imgArray) {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) { // Reduced count to 8 for cleaner laptop look
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 250) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 250) + 'px';
+
+        // We calculate position so they don't go off the edges
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+        
         document.body.appendChild(img);
         setTimeout(() => img.remove(), 1000);
     }
