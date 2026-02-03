@@ -80,7 +80,7 @@ button {
 }
 
 .temp-img {
-    position: fixed; width: 200px; border-radius: 20px;
+    position: fixed; width: 120; border-radius: 15px;
     pointer-events: none; z-index: 100;
     animation: popFade 3s forwards;
 }
