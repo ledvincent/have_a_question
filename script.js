@@ -12,8 +12,7 @@ function handleNo() {
     const mainText = document.getElementById('main-text');
     const bg = document.getElementById('bg-image');
 
-    // 1. Progressively Grayscale the background
-    // 0 -> 25% -> 50% -> 75% -> 100%
+    // Progressively Grayscale
     bg.style.filter = `grayscale(${noCount * 25}%)`;
 
     leftBtn.innerText = "← Go Back";
@@ -23,33 +22,36 @@ function handleNo() {
     if (noCount === 1) {
         mainText.innerText = "I think you misclicked? 🤨";
         rightBtn.style.transform = "scale(0.8)";
+        spawnPopups(sadImages); // Pops on step 1
     } 
     else if (noCount === 2) {
         mainText.innerText = "You're breaking my heart...";
         rightBtn.style.transform = "scale(0.6)";
+        spawnPopups(sadImages); // Pops on step 2
     } 
     else if (noCount === 3) {
         mainText.innerText = "I'm literally shaking.";
         rightBtn.classList.add('shake');
         rightBtn.style.transform = "scale(0.4)";
+        spawnPopups(sadImages); // Pops on step 3
     } 
     else if (noCount === 4) {
         mainText.innerText = "YOU WILL REGRET THIS";
         rightBtn.style.opacity = "0.4";
         rightBtn.style.transform = "scale(0.2)";
+        spawnPopups(sadImages); // Pops on step 4
     } 
     else {
-        // FINAL NO REACHED
-        startRain("💧"); // Only rains on the final stage
+        // FINAL NO REACHED - No popups here
+        startRain("💧");
         document.getElementById('interactive-content').innerHTML = `
             <h1>Fine... 🥺</h1>
-            <p style="margin: 20px 0; font-size: 1.5rem;">Hope we meet again in our next lives..</p>
+            <p style="margin: 20px 0; font-size: 1.5rem;">You stole a piece of my heart. Please return it...</p>
             <img src="${sadImages[2]}" style="width: 80%; border-radius: 20px;">
             <br>
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Try Again?</button>
         `;
     }
-    spawnPopups(sadImages);
 }
 
 function handleYes() {
@@ -65,14 +67,16 @@ function handleYes() {
     if (yesCount === 1) {
         mainText.innerText = "Wait, really?? 🥺";
         leftBtn.style.transform = "scale(1.3)";
+        spawnPopups(happyImages); // Only pops on step 1
     }
     else if (yesCount === 2) {
         mainText.innerText = "There’s no going back…";
         leftBtn.style.transform = "scale(1.6)";
+        spawnPopups(happyImages); // Only pops on step 2
     } 
     else {
-        // FINAL YES REACHED
-        startRain("❤️"); // Only rains on the final stage
+        // FINAL YES REACHED - No popups here
+        startRain("❤️");
         document.getElementById('interactive-content').innerHTML = `
             <h1 style="color: #ff4d6d; font-size: 3.5rem;">YAY! ❤️</h1>
             <h2 style="margin-bottom: 15px; font-size: 2rem;">See you at the wedding!</h2>
@@ -81,7 +85,6 @@ function handleYes() {
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Back to Start</button>
         `;
     }
-    spawnPopups(happyImages);
 }
 
 function startRain(emoji) {
