@@ -85,7 +85,7 @@ function handleYes() {
             <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Back to Start</button>
         `;
     }
-}
+}   
 
 // ... (startRain, resetEverything, and spawnPopups functions remain the same)
 
@@ -110,7 +110,7 @@ function resetEverything() {
     yesCount = 0;
     document.getElementById('bg-image').style.filter = "grayscale(0%)";
     document.getElementById('interactive-content').innerHTML = `
-        <h1 id="main-text">To the cutest person I've met this year... Will you be my Valentine?</h1>
+        <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
         <div class="btn-container">
             <button id="leftBtn" class="btn-pink" onclick="handleYes()">Yes</button>
             <button id="rightBtn" class="btn-white" onclick="handleNo()">No</button>
@@ -123,10 +123,10 @@ function spawnPopups(imgArray) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 130) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 130) + 'px';
+        img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
         document.body.appendChild(img);
         // This ensures the element is removed AFTER the 3s fade animation finishes
-        setTimeout(() => img.remove(), 1000);
+        setTimeout(() => img.remove(), 3000);
     }
 }
