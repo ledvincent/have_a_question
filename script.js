@@ -11,29 +11,35 @@ function handleNo() {
     const rightBtn = document.getElementById('rightBtn');
     const mainText = document.getElementById('main-text');
 
-    // Change Yes button into a Back button
     leftBtn.innerText = "← Go Back";
     leftBtn.className = "btn-back";
     leftBtn.onclick = resetEverything;
 
-    // Progression
     if (noCount === 1) {
-        mainText.innerText = "Wait, seriously? 🤨";
+        mainText.innerText = "I think you misclicked? 🤨";
         rightBtn.style.transform = "scale(0.8)";
-    } else if (noCount === 2) {
+    } 
+    else if (noCount === 2) {
         mainText.innerText = "You're breaking my heart...";
         rightBtn.style.transform = "scale(0.6)";
-    } else if (noCount === 3) {
+    } 
+    else if (noCount === 3) {
         mainText.innerText = "I'm literally shaking.";
         rightBtn.classList.add('shake');
         rightBtn.style.transform = "scale(0.4)";
-    } else if (noCount >= 4) {
-        // Final No Reveal
+    } 
+    else if (noCount === 4) {
+        mainText.innerText = "YOU WILL REGRET THIS";
+        rightBtn.style.opacity = "0.4";
+        rightBtn.style.transform = "scale(0.2)";
+    } 
+    else {
         document.getElementById('interactive-content').innerHTML = `
             <h1>Fine... 🥺</h1>
-            <p style="margin:15px 0;">I guess I'll just be a hermit.</p>
-            <img src="${sadImages[2]}" style="width: 100%; border-radius: 20px;">
-            <button class="btn-back" onclick="resetEverything()" style="margin-top:20px;">Try Again?</button>
+            <p style="margin: 20px 0; font-size: 1.5rem;">I guess I'll take my chocolate and go home.</p>
+            <img src="${sadImages[2]}" style="width: 80%; border-radius: 20px;">
+            <br>
+            <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Try Again?</button>
         `;
     }
 
@@ -46,22 +52,26 @@ function handleYes() {
     const rightBtn = document.getElementById('rightBtn');
     const mainText = document.getElementById('main-text');
 
-    // Change No button into a Back button
     rightBtn.innerText = "← Go Back";
     rightBtn.className = "btn-back";
     rightBtn.onclick = resetEverything;
 
     if (yesCount === 1) {
-        mainText.innerText = "Wait, really??";
-        leftBtn.innerText = "Yes!!";
-        leftBtn.style.transform = "scale(1.2)";
-    } else {
-        // Final Yes Reveal
+        mainText.innerText = "Wait, really?? 🥺";
+        leftBtn.style.transform = "scale(1.3)";
+    }
+    else if (yesCount === 2) {
+        mainText.innerText = "There’s no going back…";
+        // Fixed: Added logic to make the Yes button even bigger on step 2
+        leftBtn.style.transform = "scale(1.6)";
+    } 
+    else {
         document.getElementById('interactive-content').innerHTML = `
-            <h1 style="color: #ff4d6d;">YAY! ❤️</h1>
-            <h2 style="margin:10px 0;">See you at the wedding!</h2>
-            <img src="${weddingPic}" style="width: 100%; border-radius: 20px;">
-            <button class="btn-back" onclick="resetEverything()" style="margin-top:20px;">Back to Start</button>
+            <h1 style="color: #ff4d6d; font-size: 3.5rem;">YAY! ❤️</h1>
+            <h2 style="margin-bottom: 15px; font-size: 2rem;">See you at the wedding!</h2>
+            <img src="${weddingPic}" style="width: 90%; border-radius: 20px;">
+            <br>
+            <button class="btn-back" onclick="resetEverything()" style="margin-top: 20px;">Back to Start</button>
         `;
     }
     
@@ -81,13 +91,15 @@ function resetEverything() {
 }
 
 function spawnPopups(imgArray) {
-    for (let i = 0; i < 3; i++) {
+    // Increased i < 10 for more images
+    for (let i = 0; i < 10; i++) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 150) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 150) + 'px';
+        img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
         document.body.appendChild(img);
-        setTimeout(() => img.remove(), 1500);
+        // Timeout matches the 3s CSS animation
+        setTimeout(() => img.remove(), 2000);
     }
 }
