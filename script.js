@@ -100,6 +100,6 @@ function spawnPopups(imgArray) {
         img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
         document.body.appendChild(img);
         // Timeout matches the 3s CSS animation
-        setTimeout(() => img.remove(), 2000);
+        setTimeout(() => img.remove(), 3000);
     }
 }
