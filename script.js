@@ -87,6 +87,8 @@ function handleYes() {
     }
 }
 
+// ... (startRain, resetEverything, and spawnPopups functions remain the same)
+
 function startRain(emoji) {
     const amount = 50; 
     for (let i = 0; i < amount; i++) {
@@ -106,11 +108,9 @@ function startRain(emoji) {
 function resetEverything() {
     noCount = 0;
     yesCount = 0;
-    // Reset background color to 0% grayscale
     document.getElementById('bg-image').style.filter = "grayscale(0%)";
-    
     document.getElementById('interactive-content').innerHTML = `
-        <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
+        <h1 id="main-text">To the cutest person I've met this year... Will you be my Valentine?</h1>
         <div class="btn-container">
             <button id="leftBtn" class="btn-pink" onclick="handleYes()">Yes</button>
             <button id="rightBtn" class="btn-white" onclick="handleNo()">No</button>
@@ -119,19 +119,14 @@ function resetEverything() {
 }
 
 function spawnPopups(imgArray) {
-    for (let i = 0; i < 8; i++) { // Reduced count to 8 for cleaner laptop look
+    for (let i = 0; i < 10; i++) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-
-        // We calculate position so they don't go off the edges
-        const x = Math.random() * (window.innerWidth - 120);
-        const y = Math.random() * (window.innerHeight - 120);
-        
-        img.style.left = x + 'px';
-        img.style.top = y + 'px';
-        
+        img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
         document.body.appendChild(img);
-        setTimeout(() => img.remove(), 1000);
+        // This ensures the element is removed AFTER the 3s fade animation finishes
+        setTimeout(() => img.remove(), 3000);
     }
 }
