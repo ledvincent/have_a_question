@@ -7,59 +7,77 @@ const weddingPic = 'images/us-wedding.png';
 
 function handleNo() {
     noCount++;
-    const noBtn = document.getElementById('noBtn');
-    const yesBtn = document.getElementById('yesBtn');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
     const mainText = document.getElementById('main-text');
 
-    // 1. Desperation Stages
+    // Change Yes button into a Back button
+    leftBtn.innerText = "← Go Back";
+    leftBtn.className = "btn-back";
+    leftBtn.onclick = resetEverything;
+
+    // Progression
     if (noCount === 1) {
-        mainText.innerText = "Wait, seriously? Click Yes! 🤨";
-        noBtn.style.transform = "scale(0.8)";
+        mainText.innerText = "Wait, seriously? 🤨";
+        rightBtn.style.transform = "scale(0.8)";
     } else if (noCount === 2) {
-        mainText.innerText = "You're breaking my heart... 💔";
-        noBtn.style.transform = "scale(0.6)";
+        mainText.innerText = "You're breaking my heart...";
+        rightBtn.style.transform = "scale(0.6)";
     } else if (noCount === 3) {
-        mainText.innerText = "I'm literally shaking right now.";
-        noBtn.classList.add('shake');
-        noBtn.style.transform = "scale(0.4)";
-    } else if (noCount === 4) {
-        mainText.innerText = "Okay, I'm fading away now...";
-        noBtn.style.opacity = "0.3";
-        noBtn.style.transform = "scale(0.2)";
-    } else {
-        // Final "No" reveal
+        mainText.innerText = "I'm literally shaking.";
+        rightBtn.classList.add('shake');
+        rightBtn.style.transform = "scale(0.4)";
+    } else if (noCount >= 4) {
+        // Final No Reveal
         document.getElementById('interactive-content').innerHTML = `
-            <h1>Fine... be like that. 🥺</h1>
-            <p>I'll just go buy 10 cats and be a hermit.</p>
+            <h1>Fine... 🥺</h1>
+            <p style="margin:15px 0;">I guess I'll just be a hermit.</p>
             <img src="${sadImages[2]}" style="width: 100%; border-radius: 20px;">
+            <button class="btn-back" onclick="resetEverything()" style="margin-top:20px;">Try Again?</button>
         `;
     }
 
-    // 2. Make Yes Button bigger
-    yesBtn.style.transform = `scale(${1 + (noCount * 0.4)})`;
-
-    // 3. Chaos: Spawn random sad images
     spawnPopups(sadImages);
 }
 
 function handleYes() {
     yesCount++;
-    const yesBtn = document.getElementById('yesBtn');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const mainText = document.getElementById('main-text');
+
+    // Change No button into a Back button
+    rightBtn.innerText = "← Go Back";
+    rightBtn.className = "btn-back";
+    rightBtn.onclick = resetEverything;
 
     if (yesCount === 1) {
-        yesBtn.innerText = "Wait, really??";
-    } else if (yesCount === 2) {
-        yesBtn.innerText = "Final answer??";
+        mainText.innerText = "Wait, really??";
+        leftBtn.innerText = "Yes!!";
+        leftBtn.style.transform = "scale(1.2)";
     } else {
-        // Final "Yes" reveal
+        // Final Yes Reveal
         document.getElementById('interactive-content').innerHTML = `
-            <h1 style="color: #ff4d6d; font-size: 3rem;">YAY! ❤️</h1>
-            <h2>See you at the wedding!</h2>
+            <h1 style="color: #ff4d6d;">YAY! ❤️</h1>
+            <h2 style="margin:10px 0;">See you at the wedding!</h2>
             <img src="${weddingPic}" style="width: 100%; border-radius: 20px;">
+            <button class="btn-back" onclick="resetEverything()" style="margin-top:20px;">Back to Start</button>
         `;
     }
     
     spawnPopups(happyImages);
+}
+
+function resetEverything() {
+    noCount = 0;
+    yesCount = 0;
+    document.getElementById('interactive-content').innerHTML = `
+        <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
+        <div class="btn-container">
+            <button id="leftBtn" class="btn-pink" onclick="handleYes()">Yes</button>
+            <button id="rightBtn" class="btn-white" onclick="handleNo()">No</button>
+        </div>
+    `;
 }
 
 function spawnPopups(imgArray) {
@@ -67,13 +85,9 @@ function spawnPopups(imgArray) {
         const img = document.createElement('img');
         img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 200) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+        img.style.left = Math.random() * (window.innerWidth - 150) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 150) + 'px';
         document.body.appendChild(img);
         setTimeout(() => img.remove(), 1500);
     }
-}
-
-function resetPage() {
-    location.reload(); // Simplest way to restart from scratch
 }
