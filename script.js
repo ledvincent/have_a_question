@@ -5,7 +5,6 @@ const sadImages = ['images/sad1.png', 'images/sad2.png', 'images/sad3.png'];
 const happyImages = ['images/happy1.png', 'images/happy2.png'];
 const weddingPic = 'images/us-wedding.png';
 
-// Function to completely reset everything
 function resetProject() {
     noStage = 0;
     yesStage = 0;
@@ -14,7 +13,7 @@ function resetProject() {
         <h1 id="main-text">To the cutest person I've met this year... <br> Will you be my Valentine?</h1>
         <div class="btn-container">
             <button id="yesBtn" onclick="handleYes()">Yes</button>
-            <button id="noBtn" onmouseover="handleNo()" onclick="handleNo()">No</button>
+            <button id="noBtn" onclick="handleNo()">No</button>
         </div>
     `;
 }
@@ -26,7 +25,6 @@ function createParticle(x, y, symbol, type) {
         p.className = 'particle';
         p.style.left = x + 'px';
         p.style.top = y + 'px';
-        // Tears fall (positive Y), Hearts rise (negative Y)
         const yDir = type === 'tear' ? 200 : -200;
         p.style.setProperty('--ty', (Math.random() * yDir) + 'px');
         p.style.setProperty('--tx', (Math.random() * 200 - 100) + 'px');
@@ -41,7 +39,7 @@ function handleNo() {
     const yesBtn = document.getElementById('yesBtn');
     const mainText = document.getElementById('main-text');
 
-    // 1. Move No Button
+    // 1. Move No Button instantly after click
     const x = Math.random() * (window.innerWidth - 200);
     const y = Math.random() * (window.innerHeight - 100);
     noBtn.style.position = 'fixed';
@@ -51,20 +49,20 @@ function handleNo() {
     // 2. Tear Particles
     createParticle(x + 50, y + 20, '💧', 'tear');
 
-    // 3. Chaos: Multiple images pop up everywhere
+    // 3. Spawn 4 sad images everywhere on screen
     for (let i = 0; i < 4; i++) {
         spawnPopupImage(sadImages[Math.floor(Math.random() * sadImages.length)]);
     }
 
-    // 4. Scaling
+    // 4. Update UI Scaling
     yesBtn.style.transform = `scale(${1 + (noStage * 0.6)})`;
     noBtn.style.transform = `scale(${1 - (noStage * 0.15)})`;
 
-    // 5. Text Stages
+    // 5. Progression Text
     if (noStage === 1) mainText.innerText = "Wait, are you sure? 🤨";
-    if (noStage === 2) mainText.innerText = "Stop that right now! 😤";
+    if (noStage === 2) mainText.innerText = "Please stop clicking that! 😤";
     if (noStage === 3) {
-        mainText.innerText = "I'm actually crying...";
+        mainText.innerText = "Okay, now I'm actually crying...";
         noBtn.classList.add('shake-violent');
     }
 
@@ -72,7 +70,7 @@ function handleNo() {
         document.getElementById('dynamic-content').innerHTML = `
             <h1>Fine... I'll just go buy 12 cats. 🥺</h1>
             <p>You broke my heart, but I still love you.</p>
-            <img src="${sadImages[2]}" style="width: 100%; border-radius: 20px;">
+            <img src="${sadImages[2]}" style="width: 100%; border-radius: 20px; margin-top: 15px;">
         `;
     }
 }
@@ -92,7 +90,7 @@ function handleYes() {
         document.getElementById('dynamic-content').innerHTML = `
             <h1 style="color: #ff4d6d; font-size: 3rem;">YAY! ❤️</h1>
             <h2>See you at the wedding!</h2>
-            <img src="${weddingPic}" style="width: 100%; border-radius: 20px;">
+            <img src="${weddingPic}" style="width: 100%; border-radius: 20px; margin-top: 15px;">
         `;
     }
 }
