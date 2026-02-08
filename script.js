@@ -79,10 +79,10 @@ function showFinalNoScreen() {
 }
 
 function spawnPopups(imgArray) {
-    // Now using the number of popups from CONFIG
     for (let i = 0; i < CONFIG.numPopups; i++) {
         const img = document.createElement('img');
-        img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
+        // Added 'images/' folder prefix here
+        img.src = `images/${imgArray[Math.floor(Math.random() * imgArray.length)]}`;
         img.className = 'temp-img';
         img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
         img.style.top = Math.random() * (window.innerHeight - 120) + 'px';
@@ -91,7 +91,6 @@ function spawnPopups(imgArray) {
     }
 }
 
-// ... startRain and resetEverything remain the same ...
 function resetEverything() {
     noCount = 0;
     yesCount = 0;
@@ -115,21 +114,7 @@ function startRain(emoji) {
     }
 }
 
-document.addEventListener('mousemove', function(e) {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    sparkle.style.left = e.pageX + 'px';
-    sparkle.style.top = e.pageY + 'px';
-    sparkle.innerText = '✨'; // Or '❤️'
-    document.body.appendChild(sparkle);
-
-    setTimeout(() => {
-        sparkle.remove();
-    }, 1000);
-});
-
-
-// HEART TRAIL LOGIC
+// HEART TRAIL LOGIC - Only one listener now!
 document.addEventListener('mousemove', function(e) {
     if (!CONFIG.floatingEmoji.enabled) return;
 
@@ -137,16 +122,15 @@ document.addEventListener('mousemove', function(e) {
     heart.className = 'cursor-trail';
     heart.innerHTML = CONFIG.floatingEmoji.emoji;
     
-    // Set size from config
+    // Set size and glow from config
     heart.style.setProperty('--size', CONFIG.floatingEmoji.size);
+    heart.style.textShadow = `0 0 10px ${CONFIG.floatingEmoji.color}`;
 
-    // Position the heart at the cursor location
     heart.style.left = e.pageX + 'px';
     heart.style.top = e.pageY + 'px';
 
     document.body.appendChild(heart);
 
-    // Remove the element after animation ends to keep the DOM clean
     setTimeout(() => {
         heart.remove();
     }, 1200);
