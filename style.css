@@ -31,18 +31,19 @@ body, html {
 .card {
     background: rgba(255, 182, 193, 0.9);
     backdrop-filter: blur(15px);
-    padding: 2vw 3vw; /* Slightly more horizontal padding for longer text */
+    padding: 3vw; 
     border-radius: 2vw;
     text-align: center;
     box-shadow: 0 1vw 3vw rgba(0,0,0,0.2);
     
-    /* THE FIX: These three lines allow the box to grow with the text */
+    /* Dynamic width: Grows with text but stays within screen limits */
     width: fit-content; 
-    min-width: 30vw;    /* Prevents it from being too skinny for short text */
-    max-width: 85vw;    /* Prevents it from hitting the screen edges */
+    min-width: 30vw;
+    max-width: 90vw; /* Increased to give long text more room */
 
-    max-height: 90vh; 
-    overflow-y: auto;
+    /* REMOVED overflow-y: auto to get rid of the sliding window/scrollbar */
+    overflow: hidden; 
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,11 +52,14 @@ body, html {
 }
 
 h1 {
-    font-size: 1.8vw;
+    /* THE FIX: font-size uses clamp to stay small on small screens 
+       and grow on big ones, ensuring it fits the card */
+    font-size: clamp(1.5rem, 2vw, 2.5rem); 
     color: #444;
     margin-bottom: 1.5vw;
     line-height: 1.2;
-    /* Keeps your first line on one line as requested */
+    
+    /* Keeps the line on one line as requested */
     white-space: nowrap; 
 }
 
