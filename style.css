@@ -15,11 +15,15 @@ body, html {
     font-family: 'Segoe UI', sans-serif;
 }
 
+/* ... Keep your Reset and Base Styles ... */
+
 #bg-image {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: url('images/background.png') no-repeat center center/cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     z-index: -1;
     transition: filter 0.6s ease;
 }
@@ -27,29 +31,55 @@ body, html {
 .card {
     background: rgba(255, 182, 193, 0.9);
     backdrop-filter: blur(15px);
-    padding: 2rem; /* Reduced from 4rem */
+    padding: 1.5rem;
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    width: 550px; /* Reduced from 850px */
+    width: 450px;
     max-width: 90%;
+    /* This prevents the card from going off-screen */
+    max-height: 95vh; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     z-index: 10;
 }
 
 h1 {
-    font-size: 1.5rem; /* Reduced from 2.5rem */
+    font-size: 1.4rem;
     color: #444;
-    margin-bottom: 15px;
-    white-space: nowrap; /* Keeps it on one line */
+    margin-bottom: 10px;
+    /* REMOVED white-space: nowrap so long titles wrap properly */
+    line-height: 1.2;
+}
+
+.description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* THE CRITICAL FIX: Image scaling */
+.loveyou-img {
+    width: 100%;
+    /* Limits image height so the button stays visible */
+    max-height: 35vh; 
+    object-fit: contain; 
+    border-radius: 15px;
+    margin: 10px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    height: 100px; /* Reduced from 250px */
+    gap: 15px;
+    min-height: 80px; 
 }
+
+/* ... Keep your button, drop, and temp-img styles ... */
 
 button {
     padding: 12px 28px; /* Smaller button size */

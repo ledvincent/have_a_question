@@ -23,16 +23,10 @@ function handleNo() {
 
     if (noCount < CONFIG.noMessages.length) {
         mainText.innerText = CONFIG.noMessages[noCount];
-        
-        // Calculate shrinking: Button goes from 1.0 to 0.2 scale across all messages
-        const progress = noCount / CONFIG.noMessages.length;
-        const newScale = 1 - (progress * 0.8); 
-        rightBtn.style.transform = `scale(${newScale})`;
-        
-        // Make the background grayscale based on progress
+        const progress = (noCount + 1) / CONFIG.noMessages.length;
+        rightBtn.style.transform = `scale(${1 - progress * 0.75})`;
         document.getElementById('bg-image').style.filter = `grayscale(${progress * 100}%)`;
 
-        // Switch Left Button to "Back" functionality
         leftBtn.innerText = "← Go Back";
         leftBtn.className = "btn-back";
         leftBtn.onclick = resetEverything;
@@ -51,12 +45,8 @@ function handleYes() {
 
     if (yesCount < CONFIG.yesMessages.length) {
         mainText.innerText = CONFIG.yesMessages[yesCount];
+        leftBtn.style.transform = `scale(${1 + (yesCount + 1) * 0.3})`;
         
-        // Calculate growth: Button grows by 20% each step
-        const newScale = 1 + (yesCount * 0.3);
-        leftBtn.style.transform = `scale(${newScale})`;
-
-        // Switch Right Button to "Back" functionality
         rightBtn.innerText = "← Go Back";
         rightBtn.className = "btn-back";
         rightBtn.onclick = resetEverything;
@@ -71,25 +61,37 @@ function handleYes() {
 function showFinalYesScreen() {
     startRain("❤️");
     document.getElementById('interactive-content').innerHTML = `
-        <h1 class="fade-in">${CONFIG.yesScreen.title}</h1>
+        <h1>${CONFIG.yesScreen.title}</h1>
         <p class="description">${CONFIG.yesScreen.description}</p>
         <img src="images/${CONFIG.yesScreen.image}" class="loveyou-img">
-        <br>
-        <button class="btn-back" onclick="resetEverything()">Back to Start</button>
+        <button class="btn-back" onclick="resetEverything()" style="margin-top: 10px;">Back to Start</button>
     `;
 }
 
 function showFinalNoScreen() {
     startRain("💧");
     document.getElementById('interactive-content').innerHTML = `
-        <h1 class="fade-in">${CONFIG.noScreen.title}</h1>
+        <h1>${CONFIG.noScreen.title}</h1>
         <p class="description">${CONFIG.noScreen.description}</p>
         <img src="images/${CONFIG.noScreen.image}" class="loveyou-img">
-        <br>
-        <button class="btn-back" onclick="resetEverything()">Try Again?</button>
+        <button class="btn-back" onclick="resetEverything()" style="margin-top: 10px;">Try Again?</button>
     `;
 }
 
+function spawnPopups(imgArray) {
+    // Now using the number of popups from CONFIG
+    for (let i = 0; i < CONFIG.numPopups; i++) {
+        const img = document.createElement('img');
+        img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
+        img.className = 'temp-img';
+        img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+        document.body.appendChild(img);
+        setTimeout(() => img.remove(), 1300); 
+    }
+}
+
+// ... startRain and resetEverything remain the same ...
 function resetEverything() {
     noCount = 0;
     yesCount = 0;
@@ -110,17 +112,5 @@ function startRain(emoji) {
             document.body.appendChild(drop);
             setTimeout(() => drop.remove(), 4000);
         }, i * 100);
-    }
-}
-
-function spawnPopups(imgArray) {
-    for (let i = 0; i < 10; i++) {
-        const img = document.createElement('img');
-        img.src = imgArray[Math.floor(Math.random() * imgArray.length)];
-        img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 120) + 'px';
-        document.body.appendChild(img);
-        setTimeout(() => img.remove(), 1300); 
     }
 }
