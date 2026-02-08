@@ -6,14 +6,15 @@ const CONFIG = {
     // CHAOS SETTINGS: How many images pop up per click?
     numPopups: 30, 
 
+    // Just the filenames, the script will handle the "images/" folder
     sadImages: [
-        "images/sad1.png",
-        "images/sad2.png",
-        "images/sad3.png",
+        "sad1.png",
+        "sad2.png",
+        "sad3.png",
     ],
     happyImages: [
-        "images/happy1.png",
-        "images/happy2.png",
+        "happy1.png",
+        "happy2.png",
     ],
     
     yesButtonText: "Yes",
@@ -35,18 +36,19 @@ const CONFIG = {
     yesScreen: {
         title: "YAY! ❤️",
         description: "See you at the wedding!",
-        image: "loveyou.png"
+        image: "loveyou.png" // Make sure this is in your images folder
     },
     noScreen: {
         title: "You actually said no? 💔",
         description: "You stole a piece of my heart. Please return it...",
-        image: "goodbye.png"
+        image: "goodbye.png" // Make sure this is in your images folder
     },
 
     // 6. Floating Emoji/Cursor Trail Settings
     floatingEmoji: {
         enabled: true,
-        emoji: "❤️", // Can be any emoji like ✨, ⭐, or 🌸
-        size: "1.2vw", // Proportional size based on screen width
+        emoji: "✨", 
+        size: "1vw",
+        color: "#ff4d6d", // Glow color for the heart
     }
 };
