@@ -114,3 +114,40 @@ function startRain(emoji) {
         }, i * 100);
     }
 }
+
+document.addEventListener('mousemove', function(e) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.pageX + 'px';
+    sparkle.style.top = e.pageY + 'px';
+    sparkle.innerText = '✨'; // Or '❤️'
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
+});
+
+
+// HEART TRAIL LOGIC
+document.addEventListener('mousemove', function(e) {
+    if (!CONFIG.floatingEmoji.enabled) return;
+
+    const heart = document.createElement('div');
+    heart.className = 'cursor-trail';
+    heart.innerHTML = CONFIG.floatingEmoji.emoji;
+    
+    // Set size from config
+    heart.style.setProperty('--size', CONFIG.floatingEmoji.size);
+
+    // Position the heart at the cursor location
+    heart.style.left = e.pageX + 'px';
+    heart.style.top = e.pageY + 'px';
+
+    document.body.appendChild(heart);
+
+    // Remove the element after animation ends to keep the DOM clean
+    setTimeout(() => {
+        heart.remove();
+    }, 1200);
+});

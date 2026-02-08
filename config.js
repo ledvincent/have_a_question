@@ -41,5 +41,12 @@ const CONFIG = {
         title: "You actually said no? 💔",
         description: "You stole a piece of my heart. Please return it...",
         image: "goodbye.png"
+    },
+
+    // 6. Floating Emoji/Cursor Trail Settings
+    floatingEmoji: {
+        enabled: true,
+        emoji: "❤️", // Can be any emoji like ✨, ⭐, or 🌸
+        size: "1.2vw", // Proportional size based on screen width
     }
 };
