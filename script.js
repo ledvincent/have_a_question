@@ -6,7 +6,10 @@ window.onload = () => {
 };
 
 function renderMainScreen() {
+    // Background handling
     document.getElementById('bg-image').style.backgroundImage = `url('images/${CONFIG.background}')`;
+    
+    // Injecting the title and question
     document.getElementById('interactive-content').innerHTML = `
         <h1 id="main-text">${CONFIG.title} <br> ${CONFIG.question}</h1>
         <div class="btn-container">
@@ -81,7 +84,6 @@ function showFinalNoScreen() {
 function spawnPopups(imgArray) {
     for (let i = 0; i < CONFIG.numPopups; i++) {
         const img = document.createElement('img');
-        // Added 'images/' folder prefix here
         img.src = `images/${imgArray[Math.floor(Math.random() * imgArray.length)]}`;
         img.className = 'temp-img';
         img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
@@ -114,17 +116,18 @@ function startRain(emoji) {
     }
 }
 
-// HEART TRAIL LOGIC - Only one listener now!
+// HEART TRAIL LOGIC
 document.addEventListener('mousemove', function(e) {
-    if (!CONFIG.floatingEmoji.enabled) return;
+    if (!CONFIG.floatingEmoji || !CONFIG.floatingEmoji.enabled) return;
 
     const heart = document.createElement('div');
     heart.className = 'cursor-trail';
     heart.innerHTML = CONFIG.floatingEmoji.emoji;
     
-    // Set size and glow from config
     heart.style.setProperty('--size', CONFIG.floatingEmoji.size);
-    heart.style.textShadow = `0 0 10px ${CONFIG.floatingEmoji.color}`;
+    if (CONFIG.floatingEmoji.color) {
+        heart.style.textShadow = `0 0 10px ${CONFIG.floatingEmoji.color}`;
+    }
 
     heart.style.left = e.pageX + 'px';
     heart.style.top = e.pageY + 'px';

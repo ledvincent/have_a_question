@@ -31,13 +31,16 @@ body, html {
 .card {
     background: rgba(255, 182, 193, 0.9);
     backdrop-filter: blur(15px);
-    padding: 2vw; 
+    padding: 2vw 3vw; /* Slightly more horizontal padding for longer text */
     border-radius: 2vw;
     text-align: center;
     box-shadow: 0 1vw 3vw rgba(0,0,0,0.2);
-    /* Using vw for width keeps the size proportional to the screen width */
-    width: 40vw; 
-    max-width: 600px;
+    
+    /* THE FIX: These three lines allow the box to grow with the text */
+    width: fit-content; 
+    min-width: 30vw;    /* Prevents it from being too skinny for short text */
+    max-width: 85vw;    /* Prevents it from hitting the screen edges */
+
     max-height: 90vh; 
     overflow-y: auto;
     display: flex;
@@ -52,8 +55,18 @@ h1 {
     color: #444;
     margin-bottom: 1.5vw;
     line-height: 1.2;
-    /* This ensures the title line stays on one line */
+    /* Keeps your first line on one line as requested */
     white-space: nowrap; 
+}
+
+/* Ensure the button container doesn't squash when the box grows */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5vw;
+    min-height: 8vw; 
+    width: 100%; /* Makes buttons stay centered in the expanding box */
 }
 
 .description {
@@ -70,14 +83,6 @@ h1 {
     border-radius: 1.5vw;
     margin: 1vw 0;
     box-shadow: 0 0.5vw 1.5vw rgba(0,0,0,0.1);
-}
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5vw;
-    min-height: 8vw; 
 }
 
 button {
