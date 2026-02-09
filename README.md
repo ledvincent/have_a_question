@@ -17,14 +17,16 @@ A highly customizable, interactive web application designed as a creative way to
 
 ## 🚀 How to Setup
 
-1. **Clone or Download:** Fork this repository or download the ZIP file to your computer.
-2. **Add Your Images:** Place your photos in the `images/` folder. You can add **as many images as you like** for the "chaos" effects.
+1. **Fork this Repository:** Click the "Fork" button at the top right of this page to create your own copy.
+2. **Add Your Images:** Upload your photos to the `images/` folder. You can add **as many images as you like** for the "chaos" effects.
     * `background.png`: Your main wallpaper.
     * `sad1.png`, `sad2.png`, etc.: Images for the "No" click chaos.
     * `happy1.png`, etc.: Images for the "Yes" click celebration.
     * `loveyou.png`: The final "Yes" screen image.
-3. **Configure:** Open `config.js` in a text editor to customize text and settings.
-4. **Run:** Open `index.html` in any web browser to see your creation!
+3. **Configure:** Open `config.js` directly in GitHub and click the pencil icon to edit your text, messages, and emoji settings.
+4. **Host it (Live Link):** * Go to **Settings** > **Pages** in your GitHub repo.
+    * Under "Build and deployment", set the Branch to `main` and folder to `/(root)`.
+    * Click **Save**. In a few minutes, GitHub will give you a live URL (e.g., `https://yourusername.github.io/your-repo-name/`) to send to your Valentine!
 
 ---
 
