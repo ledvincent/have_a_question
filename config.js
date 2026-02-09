@@ -5,8 +5,8 @@ const CONFIG = {
     background: "background.png", // Filename of your background image
     
     // CHAOS SETTINGS: How many images pop up per click?
-    numPopups: 15,
-    popupSize: 150, // New: size in pixels (e.g., 150 means 150px wide) 
+    numPopups: 20,
+    popupSize: 80, // New: size in pixels (e.g., 150 means 150px wide) 
 
     // Filenames for images (make sure they are in the "images/" folder)
     sadImages: [
