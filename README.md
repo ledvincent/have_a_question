@@ -10,20 +10,20 @@ A highly customizable, interactive web application designed as a creative way to
 * **Dynamic Background:** The background image smoothly transitions to grayscale as the user clicks "No."
 * **Chaos Mode:** Spawns random images all over the screen to add humor and personality.
 * **Aesthetic Cursor:** A custom heart/emoji trail follows the mouse movement.
-* **Fully Responsive:** Uses `clamp()` and `vw/vh` units to look great on laptops, tablets, and even when recorded for TikTok.
-* **Easy Configuration:** No need to dig through complex code—everything is controlled in one file.
+* **Fully Responsive:** Uses `clamp()` and `vw/vh` units to look great on any screen size.
+* **Infinite Scaling:** Add as many messages or images as you want—the code handles the rest!
 
 ---
 
 ## 🚀 How to Setup
 
 1. **Clone or Download:** Fork this repository or download the ZIP file to your computer.
-2. **Add Your Images:** Place your photos in the `images/` folder.
+2. **Add Your Images:** Place your photos in the `images/` folder. You can add **as many images as you like** for the "chaos" effects.
     * `background.png`: Your main wallpaper.
     * `sad1.png`, `sad2.png`, etc.: Images for the "No" click chaos.
     * `happy1.png`, etc.: Images for the "Yes" click celebration.
     * `loveyou.png`: The final "Yes" screen image.
-3. **Configure:** Open `config.js` in a text editor (like VS Code or Notepad) to customize text and settings.
+3. **Configure:** Open `config.js` in a text editor to customize text and settings.
 4. **Run:** Open `index.html` in any web browser to see your creation!
 
 ---
@@ -35,15 +35,17 @@ Everything you need to change is located in `config.js`. You don’t need to tou
 ### 1. Text & Titles
 * **`title`**: The first line your Valentine will see.
 * **`question`**: The main proposal question.
-* **`yesButtonText`** & **`noButtonText`**: Customize the labels on the two buttons.
+* **`yesButtonText`** & **`noButtonText`**: Customize the button labels.
 
 ### 2. The Interaction (Chaos Mode)
 * **`numPopups`**: Set how many images fly out per click (e.g., `30`).
 * **`popupSize`**: Adjust the width of the popup images in pixels (e.g., `150`).
-* **`noMessages`**: Phrases that appear as the user keeps clicking "No."
+* **`noMessages`**: Add as many phrases as you want! The more you add, the more "steps" the user has to go through before the final screen.
+* **`yesMessages`**: Just like the "No" messages, you can add multiple steps for the "Yes" path too.
 
 ### 3. Visuals & Images
 * **`background`**: The filename of your main wallpaper.
+* **`sadImages` & `happyImages`**: Add all your image filenames here. The script will pick from these randomly.
 * **`yesScreen`**: Change the final title, description, and "victory" image.
 
 ### 4. The Cursor Trail
@@ -57,7 +59,7 @@ Everything you need to change is located in `config.js`. You don’t need to tou
 ## 🛠️ Built With
 
 * **HTML5 & CSS3**
-* **Vanilla JavaScript** (No external libraries needed!)
+* **Vanilla JavaScript** (Zero dependencies!)
 
 ---
 
