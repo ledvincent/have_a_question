@@ -1,15 +1,18 @@
+// Keep track of button clicks
 let noCount = 0;
 let yesCount = 0;
 
+// Load the initial screen when the page opens
 window.onload = () => {
     renderMainScreen();
 };
 
+// Function to set up the main question screen
 function renderMainScreen() {
-    // Background handling
+    // Set background from config
     document.getElementById('bg-image').style.backgroundImage = `url('images/${CONFIG.background}')`;
     
-    // Injecting the title and question
+    // Create the main card content
     document.getElementById('interactive-content').innerHTML = `
         <h1 id="main-text">${CONFIG.title} <br> ${CONFIG.question}</h1>
         <div class="btn-container">
@@ -19,17 +22,22 @@ function renderMainScreen() {
     `;
 }
 
+// Handle clicking the "No" button
 function handleNo() {
     const mainText = document.getElementById('main-text');
     const leftBtn = document.getElementById('leftBtn');
     const rightBtn = document.getElementById('rightBtn');
 
     if (noCount < CONFIG.noMessages.length) {
+        // Change text and shrink the button
         mainText.innerText = CONFIG.noMessages[noCount];
         const progress = (noCount + 1) / CONFIG.noMessages.length;
         rightBtn.style.transform = `scale(${1 - progress * 0.75})`;
+        
+        // Fade the background to grayscale
         document.getElementById('bg-image').style.filter = `grayscale(${progress * 100}%)`;
 
+        // Turn the Yes button into a "Back" button
         leftBtn.innerText = "← Go Back";
         leftBtn.className = "btn-back";
         leftBtn.onclick = resetEverything;
@@ -41,15 +49,18 @@ function handleNo() {
     }
 }
 
+// Handle clicking the "Yes" button
 function handleYes() {
     const mainText = document.getElementById('main-text');
     const leftBtn = document.getElementById('leftBtn');
     const rightBtn = document.getElementById('rightBtn');
 
     if (yesCount < CONFIG.yesMessages.length) {
+        // Change text and grow the Yes button
         mainText.innerText = CONFIG.yesMessages[yesCount];
         leftBtn.style.transform = `scale(${1 + (yesCount + 1) * 0.3})`;
         
+        // Turn the No button into a "Back" button
         rightBtn.innerText = "← Go Back";
         rightBtn.className = "btn-back";
         rightBtn.onclick = resetEverything;
@@ -61,6 +72,7 @@ function handleYes() {
     }
 }
 
+// Display the final success screen
 function showFinalYesScreen() {
     startRain("❤️");
     document.getElementById('interactive-content').innerHTML = `
@@ -71,6 +83,7 @@ function showFinalYesScreen() {
     `;
 }
 
+// Display the final "rejection" screen
 function showFinalNoScreen() {
     startRain("💧");
     document.getElementById('interactive-content').innerHTML = `
@@ -81,18 +94,26 @@ function showFinalNoScreen() {
     `;
 }
 
+// Chaos Mode: Spawn random images on click
 function spawnPopups(imgArray) {
     for (let i = 0; i < CONFIG.numPopups; i++) {
         const img = document.createElement('img');
         img.src = `images/${imgArray[Math.floor(Math.random() * imgArray.length)]}`;
         img.className = 'temp-img';
-        img.style.left = Math.random() * (window.innerWidth - 120) + 'px';
-        img.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+        
+        const size = CONFIG.popupSize || 100; 
+        img.style.width = size + 'px';
+        
+        // Randomize position within screen bounds
+        img.style.left = Math.random() * (window.innerWidth - size) + 'px';
+        img.style.top = Math.random() * (window.innerHeight - size) + 'px';
+        
         document.body.appendChild(img);
         setTimeout(() => img.remove(), 1300); 
     }
 }
 
+// Reset the app to its original state
 function resetEverything() {
     noCount = 0;
     yesCount = 0;
@@ -100,6 +121,7 @@ function resetEverything() {
     renderMainScreen();
 }
 
+// Background Effect: Emojis falling like rain
 function startRain(emoji) {
     const amount = 50; 
     for (let i = 0; i < amount; i++) {
@@ -116,7 +138,7 @@ function startRain(emoji) {
     }
 }
 
-// HEART TRAIL LOGIC
+// Cursor Effect: Floating trail as mouse moves
 document.addEventListener('mousemove', function(e) {
     if (!CONFIG.floatingEmoji || !CONFIG.floatingEmoji.enabled) return;
 
@@ -124,6 +146,7 @@ document.addEventListener('mousemove', function(e) {
     heart.className = 'cursor-trail';
     heart.innerHTML = CONFIG.floatingEmoji.emoji;
     
+    // Set custom size and glow color from config
     heart.style.setProperty('--size', CONFIG.floatingEmoji.size);
     if (CONFIG.floatingEmoji.color) {
         heart.style.textShadow = `0 0 10px ${CONFIG.floatingEmoji.color}`;
@@ -133,8 +156,5 @@ document.addEventListener('mousemove', function(e) {
     heart.style.top = e.pageY + 'px';
 
     document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 1200);
+    setTimeout(() => heart.remove(), 1200);
 });

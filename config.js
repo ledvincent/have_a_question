@@ -1,12 +1,14 @@
+// Main configuration for the website
 const CONFIG = {
-    title: "To the cutest person I've met this year...",
-    question: "Will you be my Valentine?",
-    background: "background.png",
+    title: "To the cutest person I've met this year...", // The very first line
+    question: "Will you be my Valentine?", // The second line (question)
+    background: "background.png", // Filename of your background image
     
     // CHAOS SETTINGS: How many images pop up per click?
-    numPopups: 30, 
+    numPopups: 15,
+    popupSize: 150, // New: size in pixels (e.g., 150 means 150px wide) 
 
-    // Just the filenames, the script will handle the "images/" folder
+    // Filenames for images (make sure they are in the "images/" folder)
     sadImages: [
         "sad1.png",
         "sad2.png",
@@ -17,9 +19,11 @@ const CONFIG = {
         "happy2.png",
     ],
     
+    // Button text
     yesButtonText: "Yes",
     noButtonText: "No",
 
+    // Messages that appear when clicking "No"
     noMessages: [
         "I think you misclicked? 🤨",
         "You're breaking my heart...",
@@ -27,28 +31,32 @@ const CONFIG = {
         "YOU WILL REGRET THIS",
     ],
 
+    // Messages that appear when clicking "Yes" (before the final screen)
     yesMessages: [
         "Wait, really?? 🥺",
         "There’s no going back…",
         "Final answer? ❤️"
     ],
 
+    // Final screen content if they say Yes
     yesScreen: {
         title: "YAY! ❤️",
         description: "See you at the wedding!",
-        image: "loveyou.png" // Make sure this is in your images folder
+        image: "loveyou.png" 
     },
+    
+    // Final screen content if they say No
     noScreen: {
         title: "You actually said no? 💔",
         description: "You stole a piece of my heart. Please return it...",
-        image: "goodbye.png" // Make sure this is in your images folder
+        image: "goodbye.png" 
     },
 
-    // 6. Floating Emoji/Cursor Trail Settings
+    // Cursor Trail/Floating Emoji Settings
     floatingEmoji: {
         enabled: true,
         emoji: "✨", 
-        size: "1vw",
-        color: "#ff4d6d", // Glow color for the heart
+        size: "1.2vw",
+        color: "#ff4d6d", // Glow color
     }
 };
