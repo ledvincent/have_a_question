@@ -2,6 +2,14 @@
 
 A highly customizable, interactive web application designed as a creative way to ask someone out. This project features a "persuasive" UI where the buttons react to the user's choices, background filters that change with the mood, and a chaotic popup system.
 
+--- 
+## 🚀 Quick Start (5-Minute Setup)
+
+1. **Fork** this repo to your account.
+2. **Upload** your photos to the `images/` folder.
+3. **Edit `config.js`** to change the names, messages, and filenames.
+4. **Go to Settings > Pages**, select the `main` branch, and click **Save**.
+5. **Share the link** GitHub gives you with your Valentine! ❤️
 ---
 
 ## ✨ Features
